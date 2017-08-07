@@ -256,7 +256,7 @@ def door1():
                         sys.stdout.write('You succumb to their military strength.')
                     elif fight == "ATTACK":
                         fight_choice = True
-                        sys.stdout.write('\n')
+                        clear_screen()
                         sys.stdout.write('You nod to your companion, waiting at the next door.')
                         sys.stdout.write('\n')
                         sys.stdout.write('You give her a confident nod.')
