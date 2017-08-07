@@ -27,7 +27,7 @@ int main()
     
 }
 
-int getSuit()
+suits getSuit()
 {
     char chooseSuit = 'C';
     bool goodSuit = false;
