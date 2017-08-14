@@ -1,3 +1,4 @@
+#start game from game.py
 from common import *
 import start
 

@@ -1,3 +1,4 @@
+#start game from game.py
 import start
 from random import randint
 
@@ -33,7 +34,8 @@ def twoWays(option1, option2):
         else:
             clearScreen()
             print "Please choose from the numbers below."
-    
+            
+#used for debugging    
 def displayStats(arr):
     print '\nWEAPON:\t', arr[Stats.WEAPON]
     print 'HP:\t', arr[Stats.HP]
@@ -42,21 +44,7 @@ def displayStats(arr):
     print 'WIS:\t', arr[Stats.WIS]
     print 'AGL:\t', arr[Stats.AGL]
     next_clear()
-
-def gameOver():
-    print 'GAME OVER'
-    print 'Try again?'
-    tryAgain = twoWays('YES', 'NO')
-    if tryAgain == '1':
-        for rooms in range(len(roomEntered)):
-            roomEntered[rooms] = 'n'
-        for stats in range(len(playerStats)):
-            del playerStats[-1]
-        soldierStats[Stats.HP] = 30
-        start.dungeonCell()
-    else:
-        return 0
-        
+    
 def tryAgain():
     print 'Try again?'
     tryAgain = twoWays('YES', 'NO')
@@ -70,6 +58,12 @@ def tryAgain():
     else:
         return 0
         
+def gameOver():
+    print 'GAME OVER'
+    tryAgain()
+        
+
+       
 def battle(enemy, player):
     while player[Stats.HP] > 0 and enemy[Stats.HP] > 0:
         #player turn
@@ -83,7 +77,6 @@ def battle(enemy, player):
             attack(enemy, player)
         elif action == '2':
             defense = defend(player)
-            print 'defense: ', defense
         next_clear()
         
         #enemy turn
@@ -98,7 +91,7 @@ def battle(enemy, player):
             elif defense == True:
                 
                 if player[Stats.WEAPON] == warriorStats[Stats.WEAPON]:
-                    print 'You block with your shield.'
+                    print 'You block your enemy\'s attack with your shield.'
                     enemyAttack = enemyAttack - playerStats[Stats.STR]/4
                     if enemyAttack <= 0:
                         print 'You don\'t take any damage.'
@@ -147,7 +140,7 @@ def attack(enemy, player):
         if hit == 0:
             print 'You lunged with your shield, but your enemy dodged your attack.'
         else:
-            print 'You lunged with your shield, and did', hit, 'points of damage.'
+            print 'You lunged with your shield, and do', hit, 'points of damage.'
             enemy[Stats.HP] = enemy[Stats.HP] - hit
     
     elif player[Stats.WEAPON] == mageStats[Stats.WEAPON]:
@@ -176,7 +169,6 @@ def attack(enemy, player):
             
 def defend(player):
     defend = randint(0, 10)
-    print 'defend: ', defend
     if player[Stats.WEAPON] == warriorStats[Stats.WEAPON]:
         print 'You raise your shield and brace for impact.'
 
@@ -190,3 +182,4 @@ def defend(player):
         return True
     else:
         return False
+
