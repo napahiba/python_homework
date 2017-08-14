@@ -5,7 +5,7 @@ class Stats:
     WEAPON, HP, AP, STR, WIS, AGL = range(6)
     
 warriorStats = ['OAKEN SHIELD', 25, 10, 12, 5, 7]
-mageStats = ['AMETHYST WAND', 12, 20, 5, 8, 7]
+mageStats = ['AMETHYST WAND', 12, 20, 5, 7, 7]
 rogueStats = ['SILVER DAGGER', 18, 15, 7, 5, 12]
 soldierStats = ['BROADSWORD', 30, 0, 6, 5, 5]
 playerStats = []
@@ -74,12 +74,16 @@ def battle(enemy, player):
     while player[Stats.HP] > 0 and enemy[Stats.HP] > 0:
         #player turn
         clearScreen()
+        defense = False
         print '==========BATTLE=========='
         print 'Soldier HP: ', enemy[Stats.HP]
         print 'Your HP: ', player[Stats.HP], '\n'
         action = battleMenu(player)
         if action == '1':
             attack(enemy, player)
+        elif action == '2':
+            defense = defend(player)
+            print 'defense: ', defense
         next_clear()
         
         #enemy turn
@@ -91,6 +95,29 @@ def battle(enemy, player):
             if enemyAttack == 0:
                 print 'Your enemy swings his sword wildly, narrowly missing you.'
                 next_clear()
+            elif defense == True:
+                
+                if player[Stats.WEAPON] == warriorStats[Stats.WEAPON]:
+                    print 'You block with your shield.'
+                    enemyAttack = enemyAttack - playerStats[Stats.STR]/4
+                    if enemyAttack <= 0:
+                        print 'You don\'t take any damage.'
+                        next_clear()
+                    else:
+                        print 'You take ', enemyAttack, 'points of damage.'
+                        player[Stats.HP] = player[Stats.HP] - enemyAttack
+                        next_clear()
+                        
+                if player[Stats.WEAPON] == mageStats[Stats.WEAPON]:
+                    print 'You pour your strength into your barrier.'
+                    enemy[Stats.HP] = enemy[Stats.HP] - enemyAttack
+                    print 'Your enemy\'s attack rebounds, and he takes', enemyAttack, 'points of damage.'
+                    next_clear()
+                    
+                if player[Stats.WEAPON] == rogueStats[Stats.WEAPON]:
+                    print 'Your footwork is fast.'
+                    print 'Anticipating your foe\'s moves, you dodge his attack completely.'
+                    next_clear()
             else:
                 print 'Your enemy lands a blow, dealing', enemyAttack, 'damage to you.'
                 player[Stats.HP] = player[Stats.HP] - enemyAttack
@@ -101,7 +128,7 @@ def battle(enemy, player):
         gameOver()
     else:
         print "Your enemy has fallen!"
-    
+        next_clear()
     
 def battleMenu(player):
     if player[Stats.WEAPON] == warriorStats[Stats.WEAPON]:
@@ -146,3 +173,20 @@ def attack(enemy, player):
             print 'He is caught by surprise!'
             print 'You swiftly thrust your dagger for an extra', bonus, 'points of damage.'
             enemy[Stats.HP] = enemy[Stats.HP] - hit
+            
+def defend(player):
+    defend = randint(0, 10)
+    print 'defend: ', defend
+    if player[Stats.WEAPON] == warriorStats[Stats.WEAPON]:
+        print 'You raise your shield and brace for impact.'
+
+    elif player[Stats.WEAPON] == mageStats[Stats.WEAPON]:
+        print 'You weave a barrier of magical energy in front of you.'
+        
+    elif player[Stats.WEAPON] == rogueStats[Stats.WEAPON]:
+        print 'Light on your feet, you ready for the coming attack.'
+    
+    if defend >= 4:
+        return True
+    else:
+        return False

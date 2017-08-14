@@ -40,8 +40,6 @@ def roomA1():
         print('Soon just a tiny glint of light is left from the corridor you just left.')
         print('Finally, you reach the bottom of the stair, but you can\'t see a thing.')
         
-        displayStats(playerStats)
-        
         if playerStats[Stats.WEAPON] == mageStats[Stats.WEAPON]:
             clearScreen()
             print('\nYou raise your wand and cast a spell')

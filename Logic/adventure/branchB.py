@@ -23,6 +23,13 @@ def roomB1():
             
             battle(soldierStats, playerStats)
             
+            print 'Having defeated the sentry, you loot the key to the main gate.'
+            print 'Before any other guards can realize you have escaped,'
+            print 'you and your companion easily make your way to the entrance.'
+            print 'You unlock the main gate and run for the hills.\n'
+            print 'CONGRATULATIONS! You have escaped the dungeon.'
+            tryAgain()
+            
         else:
             clearScreen()
             print('You gently inch the door open. Peering through the sliver of doorway,')
@@ -78,3 +85,4 @@ def roomB1():
             else:
                 
                 print('Suddenly, the guard turns around. He promptly draws his sword and runs you through.')
+                gameOver()
