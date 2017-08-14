@@ -21,8 +21,8 @@ def display_stats():
     sys.stdout.write('Strength: ')
     sys.stdout.write(str(game.strength))
     sys.stdout.write('\n')
-    sys.stdout.write('Agility: ')
-    sys.stdout.write(str(game.agility))
+    sys.stdout.write('Stealth: ')
+    sys.stdout.write(str(game.stealth))
     sys.stdout.write('\n')
     sys.stdout.write('Wisdom: ')
     sys.stdout.write(str(game.wisdom))
@@ -84,19 +84,19 @@ def dungeon_cell():
         if weapon == '1' or weapon == 'oaken shield':
             game.weapon = 'oaken shield'
             game.strength = 12
-            game.agility = 7
+            game.stealth = 7
             game.wisdom = 5
             weapon_choice = True
         elif weapon == '2' or weapon == 'amethyst wand':
             game.weapon = 'amethyst wand'
             game.strength = 7
-            game.agility = 5
+            game.stealth = 5
             game.wisdom = 12
             weapon_choice = True
         elif weapon == '3' or weapon == 'silver dagger':
             game.weapon = 'silver dagger'
             game.strength = 5
-            game.agility = 12
+            game.stealth = 12
             game.wisdom = 7
             weapon_choice = True
         else:
@@ -107,6 +107,7 @@ def dungeon_cell():
     sys.stdout.write('\n' * 2)
     sys.stdout.write('She hands you the ')
     sys.stdout.write(game.weapon)
+    display_stats()
     sys.stdout.write('. Then pulls you to your feet.')
     sys.stdout.write('\n')
     sys.stdout.write('\"C\'mon!\", she urges, leading you out of the cell.')
@@ -290,7 +291,7 @@ def door1():
         
 
 def game():
-
+    stats = ['Weapon', 'Strength', 'Stealth', 'Wisdom']
     dungeon_cell()
     junction1 = cell_hall()
     if junction1 == 'LEFT':
